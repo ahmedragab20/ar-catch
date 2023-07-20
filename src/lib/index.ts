@@ -118,7 +118,7 @@ const $catch = initCatch;
  **/
 const useCache = useCacheUtil;
 
-export {
+export default {
   $catch,
   useCache
 };

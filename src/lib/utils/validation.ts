@@ -48,16 +48,18 @@ export const validRequestConfig = (req: Partial<IRequestConfig> | string) => {
   }
 };
 
-export const validGlobalConfig = (config: IFetchGlobalConfig) => {
+export const validGlobalConfig = (config: Partial<IFetchGlobalConfig>) => {
+  if (!config) return;
+
   const { baseURL, defaultOptions = {}, alias } = config;
 
-  if (!baseURL || typeof baseURL !== "string") {
-    throw new Error("baseURL is required");
-  } else if (!isObject(defaultOptions)) {
+  if (baseURL && typeof baseURL !== "string") {
+    throw new Error("baseURL must be a string");
+  } else if (defaultOptions && !isObject(defaultOptions)) {
     throw new Error("defaultOptions must be an object");
-  } else if (typeof alias !== "string") {
+  } else if (alias && typeof alias !== "string") {
     throw new Error("alias must be a string");
-  } else if (window[alias]) {
+  } else if (alias && window[alias]) {
     throw new Error(
       `The alias ${alias} is already used by another variable in the global scope`
     );

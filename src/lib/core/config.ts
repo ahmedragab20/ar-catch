@@ -2,7 +2,7 @@ import { Catch } from "./index";
 import { IFetchGlobalConfig } from "../types/req";
 import { validGlobalConfig } from "../utils/validation";
 import { AppWindowState } from "../state/window";
-export default (req: IFetchGlobalConfig) => {
+export default (req: Partial<IFetchGlobalConfig> = {}) => {
   const {
     baseURL,
     defaultOptions = {},
