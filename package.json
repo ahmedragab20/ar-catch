@@ -14,8 +14,8 @@
   "types": "./dist/lib/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/ar-catch.js",
-      "require": "./dist/ar-catch.umd.cjs"
+      "import": "./dist/index.js",
+      "require": "./dist/index.umd.cjs"
     }
   },
   "files": [
