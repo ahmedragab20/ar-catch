@@ -29,7 +29,7 @@ export default (req: Partial<IFetchGlobalConfig> = {}) => {
   new AppWindowState(alias, lib).set();
 
   console.log(
-    `%c🎉 ${alias} is successfully initialized!`,
+    `%c😱 ${alias} is successfully initialized!`,
     `font-weight: bold;`
   );
 

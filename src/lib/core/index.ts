@@ -40,9 +40,8 @@ export class Catch {
       opts.body = prettifyRequestBody(opts.body);
     } else if (method === "GET" && isObject(opts?.body)) {
       const body = prettifyRequestBody(opts.body, { urlLike: true });
-      delete opts.body;
 
-      internalUrl += body;
+      internalUrl += `?${body}`;
     }
 
     return { url: internalUrl, opts };
@@ -114,7 +113,7 @@ export class Catch {
       if (hasDirectURL) {
         url = !!reqOptions2.customOptions?.useWithBaseURL
           ? `${this.config.baseURL}${req}`
-          : `${req}`; // ✅
+          : `${req}`;
       } else {
         const customizedUrl =
           !!this.config.baseURL && !!ep
@@ -185,7 +184,13 @@ export class Catch {
         }
 
         opts.body = this._getRequestBody(method, url, opts).opts.body;
+
         url = this._getRequestBody(method, url, opts).url; // whether it'll be returned the same or with the body
+
+        if (method === "GET" && !!isObject(opts?.body)) {
+          // after formatting the body, it should be delete if the method is GET to not send it with the request
+          delete opts.body;
+        }
       }
 
       // Define interceptor functions
