@@ -13,8 +13,7 @@ export default defineConfig({
   plugins: [
     dts({
       insertTypesEntry: true,
-      include: "src/lib/**/*",
-      rollupTypes: true,
+      // include: "src/lib/types.d.ts",
     }),
   ],
 });

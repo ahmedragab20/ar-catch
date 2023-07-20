@@ -63,7 +63,7 @@ export interface IFetchGlobalConfig {
   [key: string]: any;
 }
 
-interface IReqData {
+export interface IReqData {
   /**
    * The request body data.
    *
@@ -73,7 +73,7 @@ interface IReqData {
    */
   [key: string]: any;
 }
-interface IReqOptions {
+export interface IReqOptions {
   /**
    * The request body data
    */
@@ -89,7 +89,7 @@ interface IReqOptions {
   [key: string]: any;
 }
 
-interface IReqOptions2CustomOptions {
+export interface IReqOptions2CustomOptions {
   /**
    * The HTTP request method
    *

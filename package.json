@@ -1,6 +1,6 @@
 {
   "name": "ar-catch",
-  "version": "0.0.7",
+  "version": "0.0.6",
   "description": "A TypeScript library for making HTTP requests with caching system that can be used as standalone feature.",
   "author": "Ahmed Ragab <ahmedragab20901@gmail.com>",
   "license": "MIT",
@@ -11,7 +11,7 @@
   "type": "module",
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
-  "types": "./dist/lib/types/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/index.js",
