@@ -9,13 +9,13 @@
     "url": "https://github.com/ahmedragab20/ar-catch"
   },
   "type": "module",
-  "main": "./dist/ar-cache.umd.cjs",
-  "module": "./dist/ar-cache.js",
+  "main": "./dist/ar-catch.umd.cjs",
+  "module": "./dist/ar-catch.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/ar-cache.js",
-      "require": "./dist/ar-cache.umd.cjs"
+      "import": "./dist/ar-catch.js",
+      "require": "./dist/ar-catch.umd.cjs"
     }
   },
   "files": [
