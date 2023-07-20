@@ -310,4 +310,4 @@ If you have any idea, you can open an issue and let me know about it, or you can
 
 `profit Mohamed (peace be upon him) said: "You will not be a true believer until you love for your brother what you love for yourself." [Sahih Al-Bukhari]`
 
-`May Allah bless you all, and thanks for reaching to this point 💚`
+`May Allah bless you all, and thanks for reaching this point 💚`
