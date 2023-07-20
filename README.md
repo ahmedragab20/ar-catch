@@ -12,7 +12,7 @@
 
 [![npm version](https://img.shields.io/badge/NPM-v0.0.13-red)](https://www.npmjs.com/package/ar-catch)
 [![install size](https://img.shields.io/badge/Download_size-60.3kB-blue)](https://packagephobia.com/result?p=ar-catch)
-[![Minified + GZipped](https://img.shields.io/badge/Minified_+_GZipped-3.3%20kB-orange)](https://bundlephobia.com/package/ar-catch@0.0.11)
+[![Minified + GZipped](https://img.shields.io/badge/Minified_+_GZipped-3.3%20kB-orange)](https://bundlephobia.com/package/ar-catch@0.0.13)
 
 </div>
 
