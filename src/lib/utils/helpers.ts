@@ -1,4 +1,4 @@
-import { FetchInterceptor, IReqData } from "../types/req";
+import { FetchInterceptor, IReqData } from "../types/index.ts";
 
 interface IBodyOptions {
   /**

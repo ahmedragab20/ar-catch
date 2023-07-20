@@ -1,4 +1,4 @@
-import { IFetchGlobalConfig, IRequestConfig } from "../types/req";
+import { IFetchGlobalConfig, IRequestConfig } from "../types/index.ts";
 import { isObject } from "./helpers";
 
 export const isRegularFunction = (fn: any) => {

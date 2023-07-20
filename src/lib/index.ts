@@ -1,5 +1,5 @@
 import initCatch from "./core/config";
-import { TCacheStrategy } from "./types";
+import { TCacheStrategy } from "./types/index.ts";
 import Cache from "./utils/Cache";
 
 /**

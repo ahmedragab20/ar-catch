@@ -1,4 +1,4 @@
-import { TCacheStrategy } from "../types";
+import { TCacheStrategy } from "../types/index.ts";
 import {
   supportedCachingStrategy,
   cachingStrategies,

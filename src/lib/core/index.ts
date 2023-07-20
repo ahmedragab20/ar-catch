@@ -1,10 +1,10 @@
-import { TCacheStrategy } from "../types";
+import { TCacheStrategy } from "../types/index.ts";
 import {
   FetchInterceptor,
   IFetchGlobalConfig,
   IRequestConfig,
   IRequestOptions2,
-} from "../types/req";
+} from "../types/index.ts";
 
 import Cache from "../utils/Cache";
 

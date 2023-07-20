@@ -9,9 +9,9 @@
     "url": "https://github.com/ahmedragab20/ar-catch"
   },
   "type": "module",
-  "main": "./dist/ar-catch.umd.cjs",
-  "module": "./dist/ar-catch.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/lib/types/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/ar-catch.js",
@@ -42,7 +42,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "rm -rf dist && tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
