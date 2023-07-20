@@ -144,17 +144,15 @@ const getTodo = async () => {
 };
 ```
 
-<!-- Tip -->
+Look: that was the basic usage, we have three ways to use the library, the basic usage, and two other ones,
 
-`Look: that was the basic usage, we have three ways to use the library, the basic usage, and two other ones,`
+the first will name it "Object Oriented" Usage (I'm sorry about the name, i know you have bad experiences with it😂),
 
-`the first will name it "Object Oriented" Usage (I'm sorry about the name, i know you have bad experiences with it😂),`
+and the second will name it "Direct URL" Usage, and you've already seen one of it's examples, which is the basic usage.
 
-`and the second will name it "Direct URL" Usage, and you've already seen one of it's examples, which is the basic usage.`
+yes, the basic usage is simply the "Direct URL" Usage, but without the options object. you'll see what i mean later.
 
-`yes, the basic usage is simply the "Direct URL" Usage, but without the options object. you'll see what i mean later.`
-
-`so, let's start with the "Object Oriented" Usage.`
+so, let's start with the "Object Oriented" Usage.
 
 ### Object Oriented Usage
 
@@ -274,9 +272,9 @@ console.log(cache.get("key"));
 
 ### issues you might encounter
 
-1- `if you're using the alias feature inside a typescript file, and you got an error that says "type is not defined", you can fix it by adding this line to the top of your file, or on the main file of your application (more recommended)`
+1- if you're using the alias feature inside a typescript file, and you got an error that says "type is not defined", you can fix it by adding this line to the top of your file, or on the main file of your application (more recommended)
 
-`hopefully this gonna be fixed soon💚`
+hopefully this gonna be fixed soon💚
 
 ```ts
 declare global {
@@ -288,9 +286,9 @@ declare global {
 
 ## Final Words
 
-`The documentation should give you an over view on how to get started with the library, but in the code you'll find more hints and messages that will help you to understand what each piece of code does`
+The documentation should give you an over view on how to get started with the library, but in the code you'll find more hints and messages that will help you to understand what each piece of code does`
 
-`if you stuck somewhere, or got confused, just hover of the name of the function or the variable and you'll find a message that will help you to understand what it does`
+if you stuck somewhere, or got confused, just hover of the name of the function or the variable and you'll find a message that will help you to understand what it does
 
 ## License
 
