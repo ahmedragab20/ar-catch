@@ -1,6 +1,6 @@
 <h1 align="center">
    <b style="font-family: monospace, monospace;">
-        AR-CATCH
+       AR-CATCH
     </b>
 </h1>
 
@@ -25,6 +25,7 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
+- [Before we begin](#before-we-begin)
 - [Installation](#installation)
   - [Package manager](#package-manager)
 - [Features](#features)
@@ -46,6 +47,14 @@
 - [Support](#support)
 - [Contributing](#contributing)
 - [Special Thanks](#special-thanks)
+
+## Before we begin
+
+<div align="center">
+ <h3>Say Goodbye to complexity</h3>
+    <img height="200" width="400" src="https://media3.giphy.com/media/nc20IGTi6pIDrHRfJ0/giphy.gif?cid=ecf05e47a0akan2ov5rj6dqgsfp51jejralo1xig4vxiwoo7&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Goodbye to complexity" />
+
+</div>
 
 ## Installation
 
