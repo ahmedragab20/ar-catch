@@ -91,7 +91,7 @@ export async function interceptFetch(
       let modifiedRequest = request;
 
       for (const interceptor of interceptors) {
-        modifiedRequest = await interceptor.onRequest(modifiedRequest);
+        modifiedRequest = await interceptor.onRequest?.(modifiedRequest) ?? modifiedRequest;
       }
 
       return modifiedRequest;

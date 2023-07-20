@@ -13,7 +13,7 @@ export interface IFetchGlobalConfig {
   /**
    * The base URL for the API requests
    */
-  baseURL: string;
+  baseURL?: string;
 
   /**
    * Default options for all API requests
@@ -225,7 +225,7 @@ export interface IRequestOptions2 {
   /**
    * Custom options for the request
    */
-  customOptions?: IReqOptions2CustomOptions;
+  customOptions?: Partial<IReqOptions2CustomOptions>;
 
   /**
    * Additional options for the request
@@ -244,7 +244,7 @@ export interface FetchInterceptor {
    * @param request - The outgoing request object
    * @returns The modified request object or a promise resolving to the modified request object
    */
-  onRequest: (request: Request) => Request | Promise<Request>;
+  onRequest?: (request: Request) => Request | Promise<Request>;
 
   /**
    * A callback function to handle errors that occur during the fetch request.
@@ -252,7 +252,7 @@ export interface FetchInterceptor {
    * @param error - The error object
    * @returns The modified error object or any other value to handle the error in a custom way
    */
-  onError: (error: any) => any;
+  onError?: (error: any) => any;
 }
 
 /**

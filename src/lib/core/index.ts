@@ -75,8 +75,8 @@ export class Catch {
       }
       if (
         isObject(req) &&
-        (req as IRequestConfig)?.ep &&
-        (req as IRequestConfig)?.fullPath
+        (req as Partial<IRequestConfig>)?.ep &&
+        (req as Partial<IRequestConfig>)?.fullPath
       ) {
         throw new Error(
           "You can't use both ep and fullPath in the same request"
