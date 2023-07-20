@@ -46,9 +46,6 @@
 - [Support](#support)
 - [Contributing](#contributing)
 - [Special Thanks](#special-thanks)
-      - [Alhamdulillah for everything 💚](#alhamdulillah-for-everything-)
-      - [profit Mohamed (peace be upon him) said: "You will not be a true believer until you love for your brother what you love for yourself." \[Sahih Al-Bukhari\]](#profit-mohamed-peace-be-upon-him-said-you-will-not-be-a-true-believer-until-you-love-for-your-brother-what-you-love-for-yourself-sahih-al-bukhari)
-        - [May Allah bless you all, and thanks for reaching to this point💚](#may-allah-bless-you-all-and-thanks-for-reaching-to-this-point)
 
 ## Installation
 
@@ -297,11 +294,11 @@ declare global {
 
 ## License
 
-MIT © [Ahmed Ragab](ahmedragab20901@gmail.com)
+MIT © [Ahmed Ragab]([https://github.com/ahmedragab20])
 
 ## Support
 
-If you like this project, you can support me by giving it a star ⭐
+If you like this project, you can support me by giving it a star and sharing it with your friends ⭐🤝🏻
 
 ## Contributing
 
@@ -309,8 +306,8 @@ If you have any idea, you can open an issue and let me know about it, or you can
 
 ## Special Thanks
 
-##### Alhamdulillah for everything 💚
+`Alhamdulillah for everything 💚`
 
-##### profit Mohamed (peace be upon him) said: "You will not be a true believer until you love for your brother what you love for yourself." [Sahih Al-Bukhari]
+`profit Mohamed (peace be upon him) said: "You will not be a true believer until you love for your brother what you love for yourself." [Sahih Al-Bukhari]`
 
-###### May Allah bless you all, and thanks for reaching to this point💚
+`May Allah bless you all, and thanks for reaching to this point 💚`
