@@ -139,9 +139,7 @@ const $catch = initCatch;
  * // Manage caching
  * const { get, set, clearCache, clearAllCaches, isCached } = useCatch.useCache();
  */
-const expose = async () => {
-  const w = await lazyWindow();
-
+const expose = () => {
   const config = async (config: Partial<IFetchGlobalConfig>) => {
     if (!config) {
       throw new Error("Please provide a valid configuration");
@@ -231,4 +229,4 @@ const expose = async () => {
   };
 };
 
-export default await expose();
+export default expose();
