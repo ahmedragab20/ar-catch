@@ -5,7 +5,6 @@ import { AppWindowState } from "../state/window";
 export default (req: Partial<IFetchGlobalConfig> = {}) => {
   const ___AR_CATCH___ = window?.["___AR_CATCH___"];
   const internalConfig = window?.["___AR_CATCH___"]?.config;
-  console.log(internalConfig, ___AR_CATCH___);
 
   // as config file, this should only be set once
   const {

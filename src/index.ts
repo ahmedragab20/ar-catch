@@ -1,26 +1,13 @@
 import useCatch from "./lib/index";
-
 const fetchConfig = useCatch.config({
   baseURL: "https://randomuser.me/api",
-  defaultOptions: {
-    headers: {
-      Pragma: "application/json",
-    },
-  },
-  onReq(request) {
-    console.log("request", request);
-    request.headers.set("ABC", "123");
-  },
-  onRes(response) {
-    return response;
-  },
 });
 
 const callRandomApi = async () => {
   const url = "https://jsonplaceholder.typicode.com/todos/1";
   const response = await useCatch.$catch(url, {
     customOptions: {
-      method: "GET",
+      method: "POST",
       cache: "PER-SESSION",
       clearCache: true,
     },
@@ -38,8 +25,9 @@ const callRandomApi = async () => {
 
 callRandomApi();
 
-const caching = useCatch.useCache();
-
+const { get, set, clearAllCaches } = useCatch.useCache("RELOAD");
+set("name", "John Doe");
+console.log(get("name"));
 console.log(
   `%cHere's the main.ts file!`,
   "color: #0bf; font-size: 2rem; font-weight: bold;"

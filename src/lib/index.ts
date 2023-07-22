@@ -1,5 +1,6 @@
 import initCatch from "./core/config";
 import {
+  ICacheManager,
   IFetchGlobalConfig,
   IRequestOptions2,
   TCacheStrategy,
@@ -14,7 +15,7 @@ import Cache from "./utils/Cache";
  * @returns An object with cache management functions.
  * @throws {Error} If the caching strategy is not provided.
  */
-const useCacheUtil = (strategy: TCacheStrategy) => {
+const useCacheUtil = (strategy: TCacheStrategy): ICacheManager => {
   if (!strategy) {
     throw new Error("Please provide a caching strategy");
   }
@@ -81,7 +82,7 @@ const useCacheUtil = (strategy: TCacheStrategy) => {
  *   // The base URL used for all requests
  *   baseURL: "your.base.url",
  *
- *   // The default alias that you want to use to call the library
+ *   // You can use it to get all the library information
  *   alias: "$anything",
  *
  *   // The default options for all requests, similar to the options in the fetch() method
@@ -113,33 +114,116 @@ const useCacheUtil = (strategy: TCacheStrategy) => {
  */
 const $catch = initCatch;
 
-
+/**
+ * This is the main entry point of the library, used to configure global settings.
+ * @returns
+ * - A function to use the configured settings. (config)
+ * - A function to trigger a request. ($catch)
+ * - A function to manage caching. (useCache)
+ * @example
+ * import useCatch from "ar-catch";
+ *
+ * // Configure the library with global settings
+ * useCatch.config({
+ * ...configurations
+ * });
+ *
+ * // Trigger a request
+ * useCatch.$catch("https://jsonplaceholder.typicode.com/todos/1")
+ *  .then((res) => console.log(res))
+ *  .catch((err) => console.log(err));
+ *
+ * // Manage caching
+ * const { get, set, clearCache, clearAllCaches, isCached } = useCatch.useCache();
+ */
 const expose = () => {
   const trigger = (url: string, options: IRequestOptions2 = {}) => {
-    return $catch()(url, options);
+    if (!url) {
+      throw new Error("Please provide a valid URL");
+    }
+
+    return $catch()(url, (options = {}));
   };
-  
+
   const config = (config: Partial<IFetchGlobalConfig>) => {
     if (!config) {
       throw new Error("Please provide a valid configuration");
     }
-    
+
     return $catch(config);
   };
 
-  /**
-   * a utility function to manage caching based on the provided caching strategy.
-   * @namespace useCache
-   * @param {TCacheStrategy} strategy - The caching strategy to use.
-   * @returns An object with cache management functions.
-   * @throws {Error} If the caching strategy is not provided.
-   **/
-  const useCache = () => useCacheUtil;
+  const useCache = (strategy: TCacheStrategy) => useCacheUtil(strategy);
 
   return {
+    /**
+     * a utility function to trigger a request.
+     * @namespace $catch
+     * @param {string} url - The URL to send the request to.
+     * @param {IRequestOptions2} options - The request options.
+     * @returns {Promise} - A promise that resolves to the response.
+     * @example without options
+     * import useCatch from "ar-catch";
+     * useCatch.$catch("https://jsonplaceholder.typicode.com/todos/1")
+     *  .then((res) => console.log(res))
+     *  .catch((err) => console.log(err));
+     *
+     * @example with options
+     * import useCatch from "ar-catch";
+     * useCatch.$catch("https://jsonplaceholder.typicode.com/todos/1", {
+     *  customOptions: {
+     *    method: "POST",
+     *    cache: "PER-SESSION",
+     *    ...etc
+     *  }
+     *
+     *  ...properties that you wanna send like body, headers, etc
+     * });
+     */
     $catch: trigger,
-    config,
-    useCache,
+    /**
+     * a utility function to configure global settings.
+     * @namespace config
+     * @param {IFetchGlobalConfig} config - The global configuration object for the library.
+     * @returns {Function} - A function to use the configured settings. [the same one as $catch]
+     * @example
+     * import useCatch from "ar-catch";
+     * useCatch.config({
+     *  // The base URL used for all requests
+     *  baseURL: "your.base.url",
+     *  // You can use it to get all the library information
+     *  alias: "$anything",
+     *  // The default options for all requests, similar to the options in the fetch() method
+     *  defaultOptions: {
+     *  headers: {},
+     *  ...etc
+     *  },
+     * // This function will be executed before the request is sent
+     *  onReq: (req) => {
+     *  // Modify the request object or perform actions before sending the request
+     *  // e.g., adding custom headers, authentication, etc.
+     *  },
+     *  // This function will be executed after the request is sent and a response is received
+     *  onRes: (res) => {
+     *  // Process the response or perform actions after receiving the response
+     *  // e.g., handling global error responses, logging, etc.
+     *  },
+     *  // This function will be executed if there is an error during the request or response handling
+     *  onErr: (err) => {
+     *  // Handle the error or perform actions when an error occurs
+     *  // e.g., handling network errors, displaying error messages, etc.
+     *  },
+     * });
+     */
+    config: config,
+    /**
+     * a utility function to manage caching based on the provided caching strategy.
+     * @namespace useCache
+     * @param {TCacheStrategy} strategy - The caching strategy to use.
+     * @returns An object with cache management functions.
+     * @throws {Error} If the caching strategy is not provided.
+     **/
+    useCache: useCache,
   };
 };
 
