@@ -2,10 +2,13 @@ import initCatch from "./core/config";
 import {
   ICacheManager,
   IFetchGlobalConfig,
+  ILibExposedOptions,
+  IRequestConfig,
   IRequestOptions2,
   TCacheStrategy,
 } from "./types/index.ts";
 import Cache from "./utils/Cache";
+import { isObject, lazyWindow } from "./utils/helpers.ts";
 
 /**
  * Custom hook to manage caching based on the provided caching strategy.
@@ -136,21 +139,22 @@ const $catch = initCatch;
  * // Manage caching
  * const { get, set, clearCache, clearAllCaches, isCached } = useCatch.useCache();
  */
-const expose = () => {
-  const trigger = (url: string, options: IRequestOptions2 = {}) => {
-    if (!url) {
-      throw new Error("Please provide a valid URL");
-    }
+const expose = async () => {
+  const w = await lazyWindow();
 
-    return $catch()(url, (options = {}));
-  };
-
-  const config = (config: Partial<IFetchGlobalConfig>) => {
+  const config = async (config: Partial<IFetchGlobalConfig>) => {
     if (!config) {
       throw new Error("Please provide a valid configuration");
     }
 
     return $catch(config);
+  };
+
+  const trigger = async (
+    req: Partial<IRequestConfig> | string,
+    reqOptions2: IRequestOptions2 = {}
+  ) => {
+    return $catch()(req, reqOptions2);
   };
 
   const useCache = (strategy: TCacheStrategy) => useCacheUtil(strategy);
@@ -227,4 +231,4 @@ const expose = () => {
   };
 };
 
-export default expose();
+export default await expose();

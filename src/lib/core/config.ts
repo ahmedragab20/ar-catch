@@ -10,7 +10,7 @@ export default (req: Partial<IFetchGlobalConfig> = {}) => {
   const {
     baseURL = internalConfig?.baseURL || "",
     defaultOptions = internalConfig?.defaultOptions || {},
-    alias = internalConfig?.alias || "catch",
+    alias = internalConfig?.alias || "$catch",
     onReq = internalConfig?.onReq || undefined,
     onRes = internalConfig?.onRes || undefined,
     onErr = internalConfig?.onErr || undefined,
@@ -27,7 +27,7 @@ export default (req: Partial<IFetchGlobalConfig> = {}) => {
     onErr,
   });
 
-  lib.call = lib.call.bind(___AR_CATCH___ || lib);
+  lib.call = lib.call.bind(lib);
 
   // set the fetch instance to the window object
   if (!internalConfig) {

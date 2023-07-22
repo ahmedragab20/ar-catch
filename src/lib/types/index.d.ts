@@ -316,3 +316,9 @@ export interface ICacheManager {
    */
   clearCache(key: string): void;
 }
+
+export interface ILibExposedOptions {
+  $catch: Function;
+  config: IFetchGlobalConfig;
+  useCache: ICacheManager;
+}
