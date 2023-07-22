@@ -6,9 +6,8 @@ import {
   IRequestConfig,
   IRequestOptions2,
   TCacheStrategy,
-} from "./types/index.ts";
+} from "./types/index";
 import Cache from "./utils/Cache";
-import { isObject, lazyWindow } from "./utils/helpers.ts";
 
 /**
  * Custom hook to manage caching based on the provided caching strategy.
