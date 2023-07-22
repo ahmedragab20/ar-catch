@@ -63,6 +63,16 @@ export interface IFetchGlobalConfig {
   [key: string]: any;
 }
 
+/**
+ *
+ * the library global settings with Catch class instance
+ */
+export interface IWindowGlobalConfig {
+  call: () => Promise<any>;
+  __getRequestBody: (method: string, url: string, opts: any) => object;
+  config: IFetchGlobalConfig;
+}
+
 export interface IReqData {
   /**
    * The request body data.

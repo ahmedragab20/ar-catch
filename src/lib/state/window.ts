@@ -1,6 +1,9 @@
+import { IWindowGlobalConfig } from "../types";
+
 declare global {
   interface Window {
     $catch: Promise<any>;
+    ___AR_CATCH___: IWindowGlobalConfig;
     [key: string]: any;
   }
 }

@@ -1,5 +1,9 @@
 import initCatch from "./core/config";
-import { TCacheStrategy } from "./types/index.ts";
+import {
+  IFetchGlobalConfig,
+  IRequestOptions2,
+  TCacheStrategy,
+} from "./types/index.ts";
 import Cache from "./utils/Cache";
 
 /**
@@ -109,16 +113,34 @@ const useCacheUtil = (strategy: TCacheStrategy) => {
  */
 const $catch = initCatch;
 
-/**
- * a utility function to manage caching based on the provided caching strategy.
- * @namespace useCache
- * @param {TCacheStrategy} strategy - The caching strategy to use.
- * @returns An object with cache management functions.
- * @throws {Error} If the caching strategy is not provided.
- **/
-const useCache = useCacheUtil;
 
-export default {
-  $catch,
-  useCache
+const expose = () => {
+  const trigger = (url: string, options: IRequestOptions2 = {}) => {
+    return $catch()(url, options);
+  };
+  
+  const config = (config: Partial<IFetchGlobalConfig>) => {
+    if (!config) {
+      throw new Error("Please provide a valid configuration");
+    }
+    
+    return $catch(config);
+  };
+
+  /**
+   * a utility function to manage caching based on the provided caching strategy.
+   * @namespace useCache
+   * @param {TCacheStrategy} strategy - The caching strategy to use.
+   * @returns An object with cache management functions.
+   * @throws {Error} If the caching strategy is not provided.
+   **/
+  const useCache = () => useCacheUtil;
+
+  return {
+    $catch: trigger,
+    config,
+    useCache,
+  };
 };
+
+export default expose();
