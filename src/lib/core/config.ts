@@ -3,7 +3,6 @@ import { IFetchGlobalConfig } from "../types/index.ts";
 import { validGlobalConfig } from "../utils/validation";
 import { AppWindowState } from "../state/window";
 export default (req: Partial<IFetchGlobalConfig> = {}) => {
-  const ___AR_CATCH___ = window?.["___AR_CATCH___"];
   const internalConfig = window?.["___AR_CATCH___"]?.config;
 
   // as config file, this should only be set once

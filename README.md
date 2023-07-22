@@ -30,14 +30,14 @@
   - [Package manager](#package-manager)
 - [Features](#features)
 - [Usage](#usage)
-  - [Basic usage](#basic-usage)
   - [Object Oriented Usage](#object-oriented-usage)
   - [Direct URL Usage](#direct-url-usage)
 - [API](#api)
+  - [config()](#config)
   - [$catch()](#catch)
   - [useCache()](#usecache)
     - [example](#example)
-  - [$catch() options table](#catch-options-table)
+  - [$config() options table](#config-options-table)
   - [$catch() options object table](#catch-options-object-table)
     - [Object Oriented Usage](#object-oriented-usage-1)
     - [Direct URL Usage](#direct-url-usage-1)
@@ -98,78 +98,65 @@ $ bower install ar-catch
 
 ## Usage
 
-### Basic usage
+_The first step is recommended in the big projects!_
 
-```js
-import arCatch from 'ar-catch';
+1. **Create a file called `api.js` or `api.ts` in your project's root directory.**
 
-const { useCache, $catch } = arCatch; // note that it's not a function, you don't need to call it
+   ```ts
+   // (file_name).config.ts;
 
-// you don't have to name it $useCache, you can name it whatever you want
-const $useCatch = $catch({
-    // base url
-    baseURL: 'https://jsonplaceholder.typicode.com',
-    // you can use this alias anywhere in your application to access the library
-    alias: 'anything',
-    // default options
-    defaultOptions: {
-        // think of it as the default options for the fetch() method that you wanna send with every request,
-        // such as headers, etc.
-        // NOTE: the naming is exactly the same as the fetch() method
-        // and that because you're literally sending these options to the fetch() method in the background
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    }
-    // interceptors
-    // 1. onReq:
-    onReq: (config) => {
-        // do something with the config object
-        return config;
-    },
-    // 2. onRes:
-    onRes: (response) => {
-        // do something with the response object
-        return response;
-    },
-    // 3. onErr:
-    onErr: (error) => {
-        // do something with the error object
-        return error;
-    },
-})
+   import useCatch from "ar-catch";
 
-const url = 'https://jsonplaceholder.typicode.com/todos/1';
+   const $catch = useCatch.config({
+     baseURL: "your.base.url",
+     alias: "$any_name",
+     onReq: (req) => {
+       /* Request */
+     },
+     onRes: (res) => {
+       /* Response */
+     },
+     onErr: (err) => {
+       /* Error */
+     },
+   });
 
-const getTodo = async () => {
-    // there's more advanced ways to use the library,
-    // but this is the basic usage
-    // it simply will send a GET request to the url (with the default options, don't worry👀)
-    const response = await $useCatch(url);
-    console.log(response);
+   // will return the instance of the library,
+   // that you can use to call an API with
+   // or have a access to the config object
+   console.log($catch);
 
+   // now you're Done 🎉
+   ```
 
-    `🎉 congratulations, you just made your first request 🎉`
-};
-```
+2. **go to where you wanna use the library**
 
-Look: that was the basic usage, we have three ways to use the library, the basic usage, and two other ones,
+   ```ts
+   import useCatch from "ar-catch";
 
-the first will name it "Object Oriented" Usage (I'm sorry about the name, i know you have bad experiences with it😂),
+   const response = await useCatch.$catch({
+     // we name this way of using the library "Object Oriented" Usage
+     // (sorry about the name😂)
+     // ...options
+   });
 
-and the second will name it "Direct URL" Usage, and you've already seen one of it's examples, which is the basic usage.
+   // or
 
-yes, the basic usage is simply the "Direct URL" Usage, but without the options object. you'll see what i mean later.
+   const response = await useCatch.$catch(url, {
+     // we name this way of using the library "Direct URL" Usage
+     // ...options
+   });
 
-so, let's start with the "Object Oriented" Usage.
+   `📑 NOTE:: any option you set in the config file, like baseURL, header, ...etc will be applied on any request`;
+   ```
 
 ### Object Oriented Usage
 
 ```js
-// you'll know why i chose this name from the syntax
+import useCatch from "ar-catch";
 
 const getTodo = async () => {
-    const response = await $useCatch({
+    const response = await useCatch.$catch({
       // this is the default method, so you don't have to specify it
       method: "GET",
       /**
@@ -207,7 +194,9 @@ const getTodo = async () => {
 ### Direct URL Usage
 
 ```js
-const response = await fetch("carts", {
+import useCatch from "ar-catch";
+
+const response = await useCatch.$catch("carts", {
   // the difference that i should mention here is that
   // the custom options object will include the options that will defined how your request will be handled
   // and anything outside of it will be sent to the fetch() method directly
@@ -220,6 +209,14 @@ const response = await fetch("carts", {
 ```
 
 ## API
+
+### config()
+`config()` is a function that you can use to configure the library, and it has the following options:
+1. **baseURL** - The base URL of your API, and it's optional.
+2. **alias** - The alias that you want to use to call the library, and it's optional.
+3. **onReq** - The function that will be called before the request is made, and it's optional.
+4. **onRes** - The function that will be called after the request is made, and it's optional.
+5. **onErr** - The function that will be called if there's an error, and it's optional.
 
 ### $catch()
 
@@ -236,7 +233,9 @@ const response = await fetch("carts", {
 #### example
 
 ```js
-const cache = useCache("RELOAD"); // with that being done, any cache that will be set by the {cache} instant will be cleared when the user reloads the page.
+import useCatch from "ar-catch";
+
+const cache = useCatch.useCache("RELOAD"); // with that being done, any cache that will be set by the {cache} instant will be cleared when the user reloads the page.
 
 `📑 NOTE:: You can use more that one instance to have all the power possible, or you can create set the cache strategy dynamic as well and it'll work perfectly as well`;
 
@@ -251,7 +250,7 @@ console.log(cache.getCachedKeys());
 console.log(cache.get("key"));
 ```
 
-### $catch() options table
+### $config() options table
 
 | Property         | Type       | Description                                                                     |
 | ---------------- | ---------- | ------------------------------------------------------------------------------- |
@@ -291,6 +290,25 @@ declare global {
     [your choosen alias]: any;
   }
 }
+
+`📮 [one more thing related to this point]`
+// > this is not a bug, but just wanted to give you a hint to take advantage of it
+
+// if you struggled with accessing the window object, you can use this one
+function waitForWindowObject() {
+  return new Promise((resolve, reject) => {
+    // Check if the window object is already loaded
+    if (document.readyState === "complete") {
+      resolve(window); // Return the window object
+    } else {
+      // If the window is not yet loaded, add an event listener to wait for it
+      window.addEventListener("DOMContentLoaded", () => {
+        resolve(window); // Return the window object once it's loaded
+      });
+    }
+  });
+}
+
 ```
 
 ## Final Words
