@@ -44,7 +44,8 @@ export default class Cache {
    * Get the cached keys.
    * @returns An array of cached keys.
    */
-  public get cachedKeys(): any { // TODO:: fix the type
+  public get cachedKeys(): any {
+    // TODO:: fix the type
     return Array.from(this._cachedKeys);
   }
 
@@ -192,6 +193,8 @@ export default class Cache {
    * @param key - The cache key.
    */
   public clearCache(key: string): void {
+    if (!key) return;
+
     const strategies = cachingStrategies();
 
     strategies.forEach((strategy) => {

@@ -12,7 +12,6 @@ interface IBodyOptions {
   jsonLike: boolean;
 }
 
-
 /**
  * Formats the request body based on the specified options.
  * @param body - The request body data.
@@ -22,7 +21,7 @@ interface IBodyOptions {
  */
 /**
  * Formats the request body based on the specified options.
- * 
+ *
  * @param body - The request body data.
  * @param opts - The options to configure the formatting of the request body.
  * @returns The prettified request body as a string.
@@ -70,8 +69,6 @@ export function prettifyRequestBody(
   return data;
 }
 
-
-
 export async function interceptFetch(
   onUseInterceptor: FetchInterceptor,
   url: string,
@@ -91,7 +88,8 @@ export async function interceptFetch(
       let modifiedRequest = request;
 
       for (const interceptor of interceptors) {
-        modifiedRequest = await interceptor.onRequest?.(modifiedRequest) ?? modifiedRequest;
+        modifiedRequest =
+          (await interceptor.onRequest?.(modifiedRequest)) ?? modifiedRequest;
       }
 
       return modifiedRequest;
@@ -125,7 +123,7 @@ export function supportedCachingStrategy(
 
 /**
  * Returns the supported caching strategies.
- * 
+ *
  * @returns An array of supported caching strategies.
  **/
 export function cachingStrategies(): string[] {
@@ -134,7 +132,7 @@ export function cachingStrategies(): string[] {
 
 /**
  * Generates a version 4 (random) UUID.
- * 
+ *
  * @returns A version 4 UUID as a string.
  */
 export function uuidV4(): string {
@@ -147,7 +145,7 @@ export function uuidV4(): string {
 
 /**
  * Checks if a value is an object.
- * 
+ *
  * @param value - The value to check.
  * @returns `true` if the value is an object, `false` otherwise.
  */
@@ -158,3 +156,26 @@ export function isObject(value: any) {
   // Check if the value is an object by comparing its toString representation
   return value && Object.prototype.toString.call(value) === "[object Object]";
 }
+
+/**
+ * awaits until the window object is available.
+ */
+export async function waitForWindowObject() {
+  return new Promise((resolve, reject) => {
+    // Check if the window object is already loaded
+    if (document.readyState === "complete") {
+      resolve(window); // Return the window object
+    } else {
+      // If the window is not yet loaded, add an event listener to wait for it
+      window.addEventListener("DOMContentLoaded", () => {
+        resolve(window); // Return the window object once it's loaded
+      });
+    }
+  });
+}
+
+export const lazyWindow = async () => {
+  const w = await waitForWindowObject();
+
+  return w;
+};

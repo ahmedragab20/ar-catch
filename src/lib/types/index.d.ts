@@ -63,6 +63,16 @@ export interface IFetchGlobalConfig {
   [key: string]: any;
 }
 
+/**
+ *
+ * the library global settings with Catch class instance
+ */
+export interface IWindowGlobalConfig {
+  call: () => Promise<any>;
+  __getRequestBody: (method: string, url: string, opts: any) => object;
+  config: IFetchGlobalConfig;
+}
+
 export interface IReqData {
   /**
    * The request body data.
@@ -259,3 +269,56 @@ export interface FetchInterceptor {
  * Represents the cache strategy options for an HTTP request.
  */
 export type TCacheStrategy = "NO-CACHE" | "PER-SESSION" | "RELOAD";
+
+/**
+ * Caching available methods
+ */
+
+export interface ICacheManager {
+  /**
+   * Gets the cached data for a key.
+   * @param key - The key for the cached data
+   * @returns The cached data for the key
+   * @throws If the key is not found in the cache
+   */
+  get(key: string): any;
+
+  /**
+   *
+   * @param key - The key for the cached data
+   * @returns `true` if the key is found in the cache; otherwise, `false`
+   */
+  isCached(key: string): boolean;
+
+  /**
+   * Gets the keys for all the cached data.
+   * @returns The keys for all the cached data
+   */
+  getCachedKeys(): string[];
+
+  /**
+   * Sets the cached data for a key.
+   * @param key - The key for the cached data
+   * @param value - The cached data for the key
+   * @returns The cached data for the key
+   * @throws If the key or value is not provided
+   */
+  set(key: string, value: any): void;
+
+  /**
+   * Clears all the cached data.
+   */
+  clearAllCaches(): void;
+
+  /**
+   * Clears the cached data for a key.
+   * @param key - The key for the cached data
+   */
+  clearCache(key: string): void;
+}
+
+export interface ILibExposedOptions {
+  $catch: Function;
+  config: IFetchGlobalConfig;
+  useCache: ICacheManager;
+}
