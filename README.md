@@ -213,7 +213,7 @@ const response = await useCatch.$catch("carts", {
 ### config()
 `config()` is a function that you can use to configure the library, and it has the following options:
 1. **baseURL** - The base URL of your API, and it's optional.
-2. **alias** - The alias that you want to use to call the library, and it's optional.
+2. **alias** - The alias that you can use to access the library anywhere in your application.
 3. **onReq** - The function that will be called before the request is made, and it's optional.
 4. **onRes** - The function that will be called after the request is made, and it's optional.
 5. **onErr** - The function that will be called if there's an error, and it's optional.
