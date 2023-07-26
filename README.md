@@ -1,6 +1,6 @@
 <!-- logo image -->
 <div>
-  <img src="./public/arcatch-01-logo.png" width="100%" />
+  <img src="./public/arcatch-01-logo.jpg" width="100%" />
 </div>
 
 <p align="center">
