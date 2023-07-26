@@ -62,6 +62,12 @@ export interface IFetchGlobalConfig {
   resType?: TAvailableResponseTypes;
 
   /**
+   * Specifies whether the request should NOT be resolved as json, text, blob, ...etc
+   * @default false
+   */
+  pureResponse?: boolean;
+
+  /**
    * Additional global configuration options
    *
    * @remarks
@@ -176,6 +182,12 @@ export interface IReqOptions2CustomOptions {
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Response#instance_methods
    */
   resType?: TAvailableResponseTypes;
+
+  /**
+   * Specifies whether the request should NOT be resolved as json, text, blob, ...etc
+   * @default false
+   */
+  pureResponse?: boolean;
 }
 export interface IRequestConfig {
   /**
@@ -252,6 +264,12 @@ export interface IRequestConfig {
    * @see https://developer.mozilla.org/en-US/docs/Web/API/Response#instance_methods
    */
   resType?: TAvailableResponseTypes;
+
+  /**
+   * Specifies whether the request should NOT be resolved as json, text, blob, ...etc
+   * @default false
+   */
+  pureResponse?: boolean;
 }
 
 export interface IRequestOptions2 {

@@ -69,8 +69,6 @@ export default class CacheStore implements ICacheStore {
    * @returns True if the key is cached, false otherwise.
    */
   public isCached(key: string): boolean {
-    console.log(`isCached: ${key}`);
-
     return !!new AppWindowState(this.container).get()?.[key];
   }
 

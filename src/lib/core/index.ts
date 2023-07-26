@@ -112,6 +112,11 @@ export class Catch {
       const resType: TAvailableResponseTypes = hasDirectURL
         ? reqOptions2?.customOptions?.resType || this.config?.resType || "json"
         : req?.resType || this.config?.resType || "json";
+      const pureResponse = hasDirectURL
+        ? reqOptions2?.customOptions?.pureResponse ||
+          this.config?.pureResponse ||
+          false
+        : req?.pureResponse || this.config?.pureResponse || false;
 
       // handle request url
       if (hasDirectURL) {
@@ -216,8 +221,6 @@ export class Catch {
       }
 
       if (cache.isCached(url)) {
-        console.log(`%c${url}`, "color: #0f0; font-weight: bold");
-        
         return cache.get(url);
       }
 
@@ -236,10 +239,11 @@ export class Catch {
       const modifiedResponse = !!this.config?.onRes
         ? ((await this.config?.onRes?.(response)) as Response)
         : response;
+      const data =
+        !!modifiedResponse?.ok && !pureResponse
+          ? await modifiedResponse?.[resType]?.()
+          : modifiedResponse || {};
 
-      const data = !!modifiedResponse?.ok
-        ? await modifiedResponse?.[resType]?.()
-        : modifiedResponse;
       // Cache the response [already handles if it doesn't have to cache it]
       cache.set(url, data);
       return data;

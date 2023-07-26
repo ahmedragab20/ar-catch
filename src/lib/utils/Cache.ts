@@ -3,6 +3,9 @@ import {
   supportedCachingStrategy,
   cachingStrategies,
   isObject,
+  isBlob,
+  blobToString,
+  retrieveBlobFromSessionStorage,
 } from "./helpers";
 import CacheStore from "../state/cache-store";
 
@@ -114,40 +117,52 @@ export default class Cache {
    * @param key - The cache key.
    * @param value - The cache value.
    */
-  private readonly setCachePerSession = (key: string, value: any): void => {
+  private readonly setCachePerSession = async (
+    key: string,
+    value: any
+  ): Promise<void> => {
     if (!key) {
       throw new Error("You must provide a key");
     }
 
     if (window) {
-      console.log({
-        [this.parsedCacheKey(key)]: value,
-      });
-
       this.cache.set("PER-SESSION", {
-        [this.parsedCacheKey(key)]: JSON.stringify(value),
+        [this.parsedCacheKey(key)]: value,
       });
       // set that in the session storage
       const sessionCache = window.sessionStorage.getItem("PER-SESSION");
 
       if (sessionCache) {
         const parsedSessionCache = JSON.parse(sessionCache);
+        
+        const getBlobString = isBlob(value)
+          ? async () => await blobToString(value)
+          : () => {};
+
+        const blobString = isBlob(value) ? await getBlobString() : () => {};
 
         window.sessionStorage.setItem(
           "PER-SESSION",
           JSON.stringify({
             ...parsedSessionCache,
-            [this.parsedCacheKey(key)]: JSON.stringify(value),
+            [`${isBlob(value) ? "_blob_file_" : ""}${this.parsedCacheKey(
+              key
+            )}`]: isBlob(value) ? blobString : value,
           })
         );
 
         return;
       }
 
+      const getBlobString = async () => await blobToString(value);
+
+      const blobString = await getBlobString();
+
       window.sessionStorage.setItem(
         "PER-SESSION",
         JSON.stringify({
-          [this.parsedCacheKey(key)]: JSON.stringify(value),
+          [`${isBlob(value) ? "_blob_file_" : ""}${this.parsedCacheKey(key)}`]:
+            isBlob(value) ? blobString : value,
         })
       );
     }
@@ -164,16 +179,28 @@ export default class Cache {
     }
     if (window) {
       // TODO:: check adding more than one key
-      // TODO:: set/get blobs
-      
       const sessionCache = window.sessionStorage.getItem("PER-SESSION");
 
       if (sessionCache) {
         const parsedSessionCache = JSON.parse(sessionCache) || null;
+        let target = null;
+        Object.keys(parsedSessionCache || {}).forEach((k: string) => {
+          const keyWithoutBlob = k.substring("_blob_file_".length);
+          if (keyWithoutBlob === this.parsedCacheKey(key)) {
+            target =
+              retrieveBlobFromSessionStorage(
+                this.parsedCacheKey(`_blob_file_${this.parsedCacheKey(key)}`)
+              ) || null;
 
-        return (
-          JSON.parse(parsedSessionCache?.[this.parsedCacheKey(key)]) || null
-        );
+            return;
+          } else {
+            target = parsedSessionCache?.[this.parsedCacheKey(key)] || null;
+
+            return;
+          }
+        });
+
+        return target || null;
       }
     }
   };
