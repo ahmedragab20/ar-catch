@@ -1,10 +1,11 @@
-import { TCacheStrategy } from "../types/index.ts";
 import {
+  TCacheStrategy,
   FetchInterceptor,
   IFetchGlobalConfig,
   IRequestConfig,
   IRequestOptions2,
 } from "../types/index.ts";
+import type { TAvailableResponseTypes } from "../types/index.ts";
 
 import Cache from "../utils/Cache";
 
@@ -108,6 +109,9 @@ export class Catch {
       let ep = hasDirectURL ? "" : req?.ep || "";
       let options = hasDirectURL ? reqOptions2 || {} : req?.options || {};
       let fullPath = hasDirectURL ? "" : req?.fullPath || "";
+      const resType: TAvailableResponseTypes = hasDirectURL
+        ? reqOptions2?.customOptions?.resType || this.config?.resType || "json"
+        : req?.resType || this.config?.resType || "json";
 
       // handle request url
       if (hasDirectURL) {
@@ -212,6 +216,8 @@ export class Catch {
       }
 
       if (cache.isCached(url)) {
+        console.log(`%c${url}`, "color: #0f0; font-weight: bold");
+        
         return cache.get(url);
       }
 
@@ -232,7 +238,7 @@ export class Catch {
         : response;
 
       const data = !!modifiedResponse?.ok
-        ? await modifiedResponse?.json?.()
+        ? await modifiedResponse?.[resType]?.()
         : modifiedResponse;
       // Cache the response [already handles if it doesn't have to cache it]
       cache.set(url, data);

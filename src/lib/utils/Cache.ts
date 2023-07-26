@@ -57,20 +57,11 @@ export default class Cache {
   public isCached(key: string): boolean {
     switch (this._key) {
       case "NO-CACHE":
-        return (
-          isObject(this.getCacheNoCache(key)) &&
-          Object.keys(this.getCacheNoCache(key)).length > 0
-        );
+        return !!this.getCacheNoCache(key);
       case "PER-SESSION":
-        return (
-          isObject(this.getCachePerSession(key)) &&
-          Object.keys(this.getCachePerSession(key)).length > 0
-        );
+        return !!this.getCachePerSession(key);
       case "RELOAD":
-        return (
-          isObject(this.getCacheReload(key)) &&
-          Object.keys(this.getCacheReload(key)).length > 0
-        );
+        return !!this.getCacheReload(key);
       default:
         return false;
     }
@@ -83,6 +74,17 @@ export default class Cache {
     TCacheStrategy,
     any
   >();
+
+  private readonly parsedCacheKey = (key: string): string => {
+    if (!key) {
+      throw new Error("You must provide a key");
+    }
+    if (!window) return key;
+
+    return key.includes("http")
+      ? `${key}`
+      : `${location.origin || ""}${key}` || "";
+  };
 
   /**
    * Set the cache for the NO-CACHE strategy.
@@ -102,7 +104,7 @@ export default class Cache {
    * @returns The cache value.
    */
   private readonly getCacheNoCache = (key: string): any => {
-    return {};
+    return null;
 
     //[TODO]:: useless but will back it later to make analyze the all the apis per session and filter the duplicated ones to speed up the app
   };
@@ -113,11 +115,18 @@ export default class Cache {
    * @param value - The cache value.
    */
   private readonly setCachePerSession = (key: string, value: any): void => {
-    this.cache.set("PER-SESSION", {
-      [key]: value,
-    });
+    if (!key) {
+      throw new Error("You must provide a key");
+    }
 
     if (window) {
+      console.log({
+        [this.parsedCacheKey(key)]: value,
+      });
+
+      this.cache.set("PER-SESSION", {
+        [this.parsedCacheKey(key)]: JSON.stringify(value),
+      });
       // set that in the session storage
       const sessionCache = window.sessionStorage.getItem("PER-SESSION");
 
@@ -128,7 +137,7 @@ export default class Cache {
           "PER-SESSION",
           JSON.stringify({
             ...parsedSessionCache,
-            [key]: value,
+            [this.parsedCacheKey(key)]: JSON.stringify(value),
           })
         );
 
@@ -138,7 +147,7 @@ export default class Cache {
       window.sessionStorage.setItem(
         "PER-SESSION",
         JSON.stringify({
-          [key]: value,
+          [this.parsedCacheKey(key)]: JSON.stringify(value),
         })
       );
     }
@@ -150,13 +159,16 @@ export default class Cache {
    * @returns The cache value.
    */
   private readonly getCachePerSession = (key: string): any => {
+    if (!key) {
+      throw new Error("You must provide a key");
+    }
     if (window) {
       const sessionCache = window.sessionStorage.getItem("PER-SESSION");
 
       if (sessionCache) {
-        const parsedSessionCache = JSON.parse(sessionCache) || {};
+        const parsedSessionCache = JSON.parse(sessionCache) || null;
 
-        return parsedSessionCache?.[key] || {};
+        return parsedSessionCache?.[this.parsedCacheKey(key)] || null;
       }
     }
   };
@@ -167,11 +179,16 @@ export default class Cache {
    * @param value - The cache value.
    */
   private readonly setCacheReload = (key: string, value: any): void => {
-    this.cache.set("RELOAD", {
-      [key]: value,
-    });
+    if (!key) {
+      throw new Error("You must provide a key");
+    }
+    if (window) {
+      this.cache.set("RELOAD", {
+        [this.parsedCacheKey(key)]: value,
+      });
 
-    new CacheStore("RELOAD").setCaches(key, value);
+      new CacheStore("RELOAD").setCaches(this.parsedCacheKey(key), value);
+    }
   };
 
   /**
@@ -180,11 +197,14 @@ export default class Cache {
    * @returns The cache value.
    */
   private readonly getCacheReload = (key: string): any => {
+    if (!key) {
+      throw new Error("You must provide a key");
+    }
+    if (!window) return null;
     // convert the cache to an array and filter it by the key
-
     const cache = new CacheStore(this._key);
 
-    return cache.getCaches(key) || {};
+    return cache.getCaches(this.parsedCacheKey(key)) || null;
   };
 
   /**
@@ -205,7 +225,7 @@ export default class Cache {
           if (sessionCache) {
             const parsedSessionCache = JSON.parse(sessionCache) || {};
 
-            delete parsedSessionCache[key];
+            delete parsedSessionCache[this.parsedCacheKey(key)];
 
             window.sessionStorage.setItem(
               "PER-SESSION",
@@ -216,7 +236,7 @@ export default class Cache {
           }
         }
       } else if (strategy.toUpperCase() === "RELOAD") {
-        new CacheStore("RELOAD").clearCache(key);
+        new CacheStore("RELOAD").clearCache(this.parsedCacheKey(key));
       }
     });
   }
@@ -252,18 +272,18 @@ export default class Cache {
       );
     }
 
-    this._cachedKeys.add(key);
+    this._cachedKeys.add(this.parsedCacheKey(key));
 
     switch (this._key) {
       case "NO-CACHE":
         // this.setCacheNoCache(key, value); TODO:: add it later
         break;
       case "PER-SESSION":
-        this.setCachePerSession(key, value);
+        this.setCachePerSession(key, value); // no need to parse the key here because it's already parsed in the setCachePerSession method
         break;
 
       case "RELOAD":
-        this.setCacheReload(key, value);
+        this.setCacheReload(key, value); // no need to parse the key here because it's already parsed in the setCacheReload method
         break;
 
       default:
@@ -286,9 +306,9 @@ export default class Cache {
       case "NO-CACHE":
         return {}; // this.getCacheNoCache(key); TODO:: add it later
       case "PER-SESSION":
-        return this.getCachePerSession(key);
+        return this.getCachePerSession(key); // no need to parse the key here because it's already parsed in the getCachePerSession method
       case "RELOAD":
-        return this.getCacheReload(key);
+        return this.getCacheReload(key); // no need to parse the key here because it's already parsed in the getCacheReload method
 
       default:
         break;

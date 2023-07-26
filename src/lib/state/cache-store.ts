@@ -60,7 +60,7 @@ export default class CacheStore implements ICacheStore {
    * @returns The cache value.
    */
   public getCaches(key: string): any {
-    return new AppWindowState(this.container).get()?.[key] || {};
+    return new AppWindowState(this.container).get()?.[key] || null;
   }
 
   /**
@@ -69,6 +69,8 @@ export default class CacheStore implements ICacheStore {
    * @returns True if the key is cached, false otherwise.
    */
   public isCached(key: string): boolean {
+    console.log(`isCached: ${key}`);
+
     return !!new AppWindowState(this.container).get()?.[key];
   }
 
