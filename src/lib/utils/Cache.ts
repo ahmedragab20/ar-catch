@@ -163,12 +163,17 @@ export default class Cache {
       throw new Error("You must provide a key");
     }
     if (window) {
+      // TODO:: check adding more than one key
+      // TODO:: set/get blobs
+      
       const sessionCache = window.sessionStorage.getItem("PER-SESSION");
 
       if (sessionCache) {
         const parsedSessionCache = JSON.parse(sessionCache) || null;
 
-        return parsedSessionCache?.[this.parsedCacheKey(key)] || null;
+        return (
+          JSON.parse(parsedSessionCache?.[this.parsedCacheKey(key)]) || null
+        );
       }
     }
   };
