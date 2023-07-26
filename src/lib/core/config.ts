@@ -10,6 +10,8 @@ export default (req: Partial<IFetchGlobalConfig> = {}) => {
     baseURL = internalConfig?.baseURL || "",
     defaultOptions = internalConfig?.defaultOptions || {},
     alias = internalConfig?.alias || "$catch",
+    resType = internalConfig?.resType || undefined,
+    pureResponse = internalConfig?.pureResponse || false,
     onReq = internalConfig?.onReq || undefined,
     onRes = internalConfig?.onRes || undefined,
     onErr = internalConfig?.onErr || undefined,
@@ -21,6 +23,8 @@ export default (req: Partial<IFetchGlobalConfig> = {}) => {
   const lib = new Catch({
     baseURL,
     defaultOptions,
+    resType,
+    pureResponse,
     onReq,
     onRes,
     onErr,

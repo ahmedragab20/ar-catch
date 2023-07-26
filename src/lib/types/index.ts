@@ -54,6 +54,20 @@ export interface IFetchGlobalConfig {
   onErr?: (error: any) => any;
 
   /**
+   * default resolver for the response
+   * allowed values are: json, text, blob, arrayBuffer, formData
+   * @default json
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Response#instance_methods
+   */
+  resType?: TAvailableResponseTypes;
+
+  /**
+   * Specifies whether the request should NOT be resolved as json, text, blob, ...etc
+   * @default false
+   */
+  pureResponse?: boolean;
+
+  /**
    * Additional global configuration options
    *
    * @remarks
@@ -160,6 +174,20 @@ export interface IReqOptions2CustomOptions {
    * - `false` or not provided: The base URL will not be used in the request
    */
   useWithBaseURL?: boolean;
+
+  /**
+   * response type: json, text, blob, arrayBuffer, formData
+   * @default json
+   *
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Response#instance_methods
+   */
+  resType?: TAvailableResponseTypes;
+
+  /**
+   * Specifies whether the request should NOT be resolved as json, text, blob, ...etc
+   * @default false
+   */
+  pureResponse?: boolean;
 }
 export interface IRequestConfig {
   /**
@@ -229,6 +257,19 @@ export interface IRequestConfig {
    * - `false` or not provided: does not affect the cached data for the request, so you can use the old caching strategy to get the cached data instead of making a new request
    */
   clearCache?: boolean;
+
+  /**
+   * response type: json, text, blob, arrayBuffer, formData
+   * @default json
+   * @see https://developer.mozilla.org/en-US/docs/Web/API/Response#instance_methods
+   */
+  resType?: TAvailableResponseTypes;
+
+  /**
+   * Specifies whether the request should NOT be resolved as json, text, blob, ...etc
+   * @default false
+   */
+  pureResponse?: boolean;
 }
 
 export interface IRequestOptions2 {
@@ -322,3 +363,10 @@ export interface ILibExposedOptions {
   config: IFetchGlobalConfig;
   useCache: ICacheManager;
 }
+
+export type TAvailableResponseTypes =
+  | "json"
+  | "text"
+  | "blob"
+  | "arrayBuffer"
+  | "formData";

@@ -6,9 +6,8 @@ import {
   IRequestConfig,
   IRequestOptions2,
   TCacheStrategy,
-} from "./types/index.ts";
+} from "./types/index";
 import Cache from "./utils/Cache";
-import { isObject, lazyWindow } from "./utils/helpers.ts";
 
 /**
  * Custom hook to manage caching based on the provided caching strategy.
@@ -113,7 +112,7 @@ const useCacheUtil = (strategy: TCacheStrategy): ICacheManager => {
  *   },
  * });
  *
- * @tip if you found an issue to access the alias globally, you can just use (window.yourAlias)
+ * @tip if you found an issue to access the alias globally, try using (window.yourAlias)
  */
 const $catch = initCatch;
 

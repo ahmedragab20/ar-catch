@@ -60,7 +60,7 @@ export default class CacheStore implements ICacheStore {
    * @returns The cache value.
    */
   public getCaches(key: string): any {
-    return new AppWindowState(this.container).get()?.[key] || {};
+    return new AppWindowState(this.container).get()?.[key] || null;
   }
 
   /**
