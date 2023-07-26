@@ -1,8 +1,7 @@
-<h1 align="center">
-   <b style="font-family: monospace, monospace;">
-       AR-CATCH
-    </b>
-</h1>
+<!-- logo image -->
+<div>
+  <img src="./public/arcatch-logo.svg" width="100%" />
+</div>
 
 <p align="center">
     Supercharge your native fetch() method with enhanced flexibility and an integrated caching system, which can be seamlessly used within requests or as a standalone feature.
@@ -11,7 +10,7 @@
 <div align="center">
 
 [![npm version](https://img.shields.io/badge/NPM-v0.0.13-red)](https://www.npmjs.com/package/ar-catch)
-[![install size](https://img.shields.io/badge/Download_size-60.3kB-blue)](https://packagephobia.com/result?p=ar-catch)
+[![install size](https://packagephobia.com/badge?p=ar-catch)](https://packagephobia.com/result?p=ar-catch)
 [![Minified + GZipped](https://img.shields.io/badge/Minified_+_GZipped-3.3%20kB-orange)](https://bundlephobia.com/package/ar-catch@0.0.13)
 
 </div>
@@ -25,7 +24,6 @@
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
-- [Before we begin](#before-we-begin)
 - [Installation](#installation)
   - [Package manager](#package-manager)
 - [Features](#features)
@@ -47,14 +45,6 @@
 - [Support](#support)
 - [Contributing](#contributing)
 - [Special Thanks](#special-thanks)
-
-## Before we begin
-
-<div align="center">
- <h3>Say Goodbye to complexity</h3>
-    <img height="200" width="400" src="https://media3.giphy.com/media/nc20IGTi6pIDrHRfJ0/giphy.gif?cid=ecf05e47a0akan2ov5rj6dqgsfp51jejralo1xig4vxiwoo7&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Goodbye to complexity" />
-
-</div>
 
 ## Installation
 
@@ -211,7 +201,9 @@ const response = await useCatch.$catch("carts", {
 ## API
 
 ### config()
+
 `config()` is a function that you can use to configure the library, and it has the following options:
+
 1. **baseURL** - The base URL of your API, and it's optional.
 2. **alias** - The alias that you can use to access the library anywhere in your application.
 3. **onReq** - The function that will be called before the request is made, and it's optional.
