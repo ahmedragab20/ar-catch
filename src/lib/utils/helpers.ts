@@ -174,8 +174,77 @@ export async function waitForWindowObject() {
   });
 }
 
+/**
+ * A lazy window object.
+ * @returns A promise that resolves to the window object.
+ */
 export const lazyWindow = async () => {
   const w = await waitForWindowObject();
 
   return w;
 };
+
+/**
+ * Checks if a value is a blob.
+ * @param value - The value to check.
+ * @returns `true` if the value is a blob, `false` otherwise.
+ */
+export function isBlob(value: any): boolean {
+  if (!value) return false;
+
+  return value instanceof Blob;
+}
+
+/**
+ * Converts a blob to a string.
+ * @param blob  - The blob to convert to string.
+ * @returns  A promise that resolves to the blob as a string.
+ */
+export function blobToString(blob: Blob): Promise<string | ArrayBuffer | null> {
+  if (!blob || !isBlob(blob)) {
+    throw new Error("You must provide a blob");
+  }
+
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
+}
+
+/**
+ * retrieves the blob data from sessionStorage.
+ * @param key - The key to retrieve the blob data.
+ */
+export function retrieveBlobFromSessionStorage(key: string) {
+  if (!key) {
+    throw new Error("You must provide a key");
+  };
+  
+
+  const perSessionObject = sessionStorage.getItem("PER-SESSION");
+  const blobAsString = perSessionObject
+    ? JSON.parse(perSessionObject)[key]
+    : null;
+    
+  if (blobAsString) {
+    const byteCharacters = atob(blobAsString.split(",")[1]);
+    const byteArrays = [];
+    for (let offset = 0; offset < byteCharacters.length; offset += 1024) {
+      const slice = byteCharacters.slice(offset, offset + 1024);
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    const blob = new Blob(byteArrays, { type: "application/octet-stream" });
+    return blob;
+  } else {
+    return null;
+  }
+}

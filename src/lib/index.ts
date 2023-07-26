@@ -112,7 +112,7 @@ const useCacheUtil = (strategy: TCacheStrategy): ICacheManager => {
  *   },
  * });
  *
- * @tip if you found an issue to access the alias globally, you can just use (window.yourAlias)
+ * @tip if you found an issue to access the alias globally, try using (window.yourAlias)
  */
 const $catch = initCatch;
 
