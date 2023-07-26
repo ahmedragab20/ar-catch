@@ -158,6 +158,11 @@ const getTodo = async () => {
        * will discuss the difference between them later in the options table section.
        */
       fullPath: URL,
+
+      // the response type, and it's optional, the default value is "json"
+      // available options are: "json", "text", "blob", "arrayBuffer", "formData"
+      resType: "json",
+
       // this options object will be combined with the default options object
       // but it will override the default options object if there's a conflict
       // ex: if you have a "headers" property in the default options object with a value of "content-type: "something not similar to this one", and you have a "headers" property in this object with a value of "content-type: "application/json", the value of the "headers" property in the default options object will be overridden with the value of the "headers" property in this object
