@@ -227,5 +227,5 @@ const expose = (): ILibExposedOptions => {
     useCache: useCache,
   };
 };
-
+export * from "./types";
 export default expose();

@@ -14,8 +14,10 @@
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noEmit": true,
+    "pretty": true,
+    "forceConsistentCasingInFileNames": true,
 
     /* Linting */
     "strict": true,
