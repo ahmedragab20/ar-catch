@@ -12,6 +12,7 @@ export {
    * - useCache (standalone caching system from the library)
    */
   libExpose as default,
+  
   /**
    * the $catch function from the library.
    * - used to make requests

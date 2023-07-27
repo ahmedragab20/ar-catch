@@ -10,14 +10,6 @@
   },
   "type": "module",
   "types": "./dist/arcatch.d.ts",
-  "typings": "./dist/arcatch.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "dist/arcatch.d.ts"
-      ]
-    }
-  },
   "main": "./dist/arcatch.umd.cjs",
   "module": "./dist/arcatch.js",
   "exports": {

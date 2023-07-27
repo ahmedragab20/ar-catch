@@ -227,7 +227,7 @@ const expose = (): ILibExposedOptions => {
     useCache: useCache,
   };
 };
-
+export * from "./types";
 export default {
   /**
    * Ar-Catch Library entry point.
