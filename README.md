@@ -65,13 +65,7 @@ yarn add ar-catch
 Using pnpm:
 
 ```bash
-pnpm add ar-catch
-```
-
-Using bower:
-
-```bash
-$ bower install ar-catch
+pnpm install ar-catch
 ```
 
 ## Features
