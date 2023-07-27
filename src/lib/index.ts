@@ -138,7 +138,7 @@ const $catch = initCatch;
  * // Manage caching
  * const { get, set, clearCache, clearAllCaches, isCached } = useCatch.useCache();
  */
-const expose = () => {
+const expose = (): ILibExposedOptions => {
   const config = async (config: Partial<IFetchGlobalConfig>) => {
     if (!config) {
       throw new Error("Please provide a valid configuration");

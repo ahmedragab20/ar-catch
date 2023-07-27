@@ -359,9 +359,19 @@ export interface ICacheManager {
 }
 
 export interface ILibExposedOptions {
-  $catch: Function;
-  config: IFetchGlobalConfig;
-  useCache: ICacheManager;
+  $catch: (
+    req: Partial<IRequestConfig> | string,
+    reqOptions2?: IRequestOptions2
+  ) => Promise<any>;
+  config: (
+    config: Partial<IFetchGlobalConfig>
+  ) => Promise<
+    (
+      req: string | Partial<IRequestConfig>,
+      reqOptions2?: IRequestOptions2
+    ) => Promise<any>
+  >;
+  useCache: (strategy: TCacheStrategy) => ICacheManager;
 }
 
 export type TAvailableResponseTypes =
