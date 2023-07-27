@@ -9,7 +9,7 @@
 
 <div align="center">
 
-[![npm version](https://img.shields.io/badge/NPM-v0.0.22-red)](https://www.npmjs.com/package/ar-catch)
+[![npm version](https://img.shields.io/badge/NPM-v0.0.23-red)](https://www.npmjs.com/package/ar-catch)
 [![Install size](https://packagephobia.com/badge?p=ar-catch)](https://packagephobia.com/result?p=ar-catch)
 [![Minified + GZipped](https://img.shields.io/badge/Minified_+_GZipped-4%20kB-orange)](https://bundlephobia.com/package/ar-catch@0.0.17)
 
