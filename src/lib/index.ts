@@ -228,4 +228,9 @@ const expose = (): ILibExposedOptions => {
   };
 };
 export * from "./types";
-export default expose();
+export default {
+  /**
+   * Ar-Catch Library entry point.
+   */
+  ...expose(),
+};

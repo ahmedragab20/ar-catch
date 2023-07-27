@@ -5,9 +5,9 @@ import dts from "vite-plugin-dts";
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, "src/lib/index.ts"),
-      name: "index",
-      fileName: "index",
+      entry: resolve(__dirname, "src/lib/lib.ts"),
+      name: "arcatch",
+      fileName: "arcatch",
     },
   },
   plugins: [

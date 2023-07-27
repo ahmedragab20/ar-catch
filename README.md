@@ -9,9 +9,9 @@
 
 <div align="center">
 
-[![npm version](https://img.shields.io/badge/NPM-v0.0.17-red)](https://www.npmjs.com/package/ar-catch)
+[![npm version](https://img.shields.io/badge/NPM-v0.0.19-red)](https://www.npmjs.com/package/ar-catch)
 [![Install size](https://packagephobia.com/badge?p=ar-catch)](https://packagephobia.com/result?p=ar-catch)
-[![Minified + GZipped](https://img.shields.io/badge/Minified_+_GZipped-3.3%20kB-orange)](https://bundlephobia.com/package/ar-catch@0.0.17)
+[![Minified + GZipped](https://img.shields.io/badge/Minified_+_GZipped-4%20kB-orange)](https://bundlephobia.com/package/ar-catch@0.0.17)
 
 </div>
 
@@ -75,7 +75,7 @@ pnpm install ar-catch
 - **interceptors 👨🏻‍✈️** - Interceptors are functions that are called before and after a request is made, they can be used to modify the request or response objects, or to handle errors.
 - **state management 🏬** - State management is a feature that allows you to store data in a global state and access it from anywhere in your application. just to mention, it sill experimental and not fully supported yet but it will be in the future.
 - **flexible syntax 🤝🏻** - The library provides a flexible syntax, which allows you to use it in different ways
-- **lightweight 🏋🏻‍♂️** - The library is very lightweight, it's only 3.3 kB minified and gzipped.
+- **lightweight 🏋🏻‍♂️** - The library is very lightweight, it's only 4 kB minified and gzipped.
 - **no dependencies 🖖🏻** - The library has no dependencies, it's completely standalone.
 - **typescript support 💙** - The library is written fully in typescript, so it has a built-in typescript support.
 - **developer friendly ❤️** - The library is developer friendly, it has a very clean and well documented codebase, and it's open source, so you can contribute to it if you want.
