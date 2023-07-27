@@ -9,7 +9,7 @@
 
 <div align="center">
 
-[![npm version](https://img.shields.io/badge/NPM-v0.0.19-red)](https://www.npmjs.com/package/ar-catch)
+[![npm version](https://img.shields.io/badge/NPM-v0.0.21-red)](https://www.npmjs.com/package/ar-catch)
 [![Install size](https://packagephobia.com/badge?p=ar-catch)](https://packagephobia.com/result?p=ar-catch)
 [![Minified + GZipped](https://img.shields.io/badge/Minified_+_GZipped-4%20kB-orange)](https://bundlephobia.com/package/ar-catch@0.0.17)
 
@@ -89,9 +89,9 @@ _The first step is recommended in the big projects!_
    ```ts
    // (file_name).config.ts;
 
-   import useCatch from "ar-catch";
+   import arcatch from "ar-catch";
 
-   const $catch = useCatch.config({
+   const $catch = arcatch.config({
      baseURL: "your.base.url",
      alias: "$any_name",
      onReq: (req) => {
@@ -116,9 +116,9 @@ _The first step is recommended in the big projects!_
 2. **go to where you wanna use the library**
 
    ```ts
-   import useCatch from "ar-catch";
+   import arcatch from "ar-catch";
 
-   const response = await useCatch.$catch({
+   const response = await arcatch.$catch({
      // we name this way of using the library "Object Oriented" Usage
      // (sorry about the name😂)
      // ...options
@@ -126,7 +126,7 @@ _The first step is recommended in the big projects!_
 
    // or
 
-   const response = await useCatch.$catch(url, {
+   const response = await arcatch.$catch(url, {
      // we name this way of using the library "Direct URL" Usage
      // ...options
    });
@@ -137,10 +137,10 @@ _The first step is recommended in the big projects!_
 ### Object Oriented Usage
 
 ```js
-import useCatch from "ar-catch";
+import arcatch from "ar-catch";
 
 const getTodo = async () => {
-    const response = await useCatch.$catch({
+    const response = await arcatch.$catch({
       // this is the default method, so you don't have to specify it
       method: "GET",
       /**
@@ -183,9 +183,9 @@ const getTodo = async () => {
 ### Direct URL Usage
 
 ```js
-import useCatch from "ar-catch";
+import arcatch from "ar-catch";
 
-const response = await useCatch.$catch("carts", {
+const response = await arcatch.$catch("carts", {
   // the difference that i should mention here is that
   // the custom options object will include the options that will defined how your request will be handled
   // and anything outside of it will be sent to the fetch() method directly
@@ -224,9 +224,9 @@ const response = await useCatch.$catch("carts", {
 #### example
 
 ```js
-import useCatch from "ar-catch";
+import arcatch from "ar-catch";
 
-const cache = useCatch.useCache("RELOAD"); // with that being done, any cache that will be set by the {cache} instant will be cleared when the user reloads the page.
+const cache = arcatch.useCache("RELOAD"); // with that being done, any cache that will be set by the {cache} instant will be cleared when the user reloads the page.
 
 `📑 NOTE:: You can use more that one instance to have all the power possible, or you can create set the cache strategy dynamic as well and it'll work perfectly as well`;
 
