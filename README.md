@@ -1,6 +1,6 @@
 <!-- logo image -->
 <div>
-  <img src="./public/arcatch-01-logo.jpg" width="100%" />
+  <img src="./assets/arcatch-01-logo.jpg" width="100%" />
 </div>
 
 <p align="center">
@@ -9,9 +9,9 @@
 
 <div align="center">
 
-[![npm version](https://img.shields.io/badge/NPM-v0.0.16-red)](https://www.npmjs.com/package/ar-catch)
-[![install size](https://packagephobia.com/badge?p=ar-catch)](https://packagephobia.com/result?p=ar-catch)
-[![Minified + GZipped](https://img.shields.io/badge/Minified_+_GZipped-3.3%20kB-orange)](https://bundlephobia.com/package/ar-catch@0.0.13)
+[![npm version](https://img.shields.io/badge/NPM-v0.0.17-red)](https://www.npmjs.com/package/ar-catch)
+[![Install size](https://packagephobia.com/badge?p=ar-catch)](https://packagephobia.com/result?p=ar-catch)
+[![Minified + GZipped](https://img.shields.io/badge/Minified_+_GZipped-3.3%20kB-orange)](https://bundlephobia.com/package/ar-catch@0.0.17)
 
 </div>
 
