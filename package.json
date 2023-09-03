@@ -51,9 +51,6 @@
     "vite": "^4.4.0",
     "vite-plugin-dts": "^3.3.1"
   },
-  "peerDependencies": {
-    "typescript": "^5.0.2"
-  },
   "publishConfig": {
     "access": "public"
   }
