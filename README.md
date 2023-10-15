@@ -1,3 +1,6 @@
+**_⚠️ It's important to know that it's now deprecated with another repo: very-good-fetch ⚠️_**
+--------
+
 <!-- logo image -->
 <div>
   <img src="./assets/arcatch-01-logo.jpg" width="100%" />
